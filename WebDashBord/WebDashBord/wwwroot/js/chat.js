@@ -9,7 +9,8 @@ connection.on("JsonGet", (json) => {
     //const encodedMsg = user + " says " + message;
     //const li = document.createElement("li");
     //li.textContent = encodedMsg;
-    document.getElementById("jjj").value = "data" + json;
+    //document.getElementById("jjj").value = "data" + json;
+    document.getElementById("test").innerHTML = json;
 });
 
 connection.start().then(function () {
