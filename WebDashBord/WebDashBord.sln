@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebDashBord", "WebDashBord\WebDashBord.csproj", "{FBC5F373-0ECC-4C26-8C22-1BBD79B35EFA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PLCGateway", "PLCGateway\PLCGateway.csproj", "{9BF7941E-C22E-4B27-8B3A-FCB0E92837CB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FBC5F373-0ECC-4C26-8C22-1BBD79B35EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBC5F373-0ECC-4C26-8C22-1BBD79B35EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBC5F373-0ECC-4C26-8C22-1BBD79B35EFA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BF7941E-C22E-4B27-8B3A-FCB0E92837CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BF7941E-C22E-4B27-8B3A-FCB0E92837CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BF7941E-C22E-4B27-8B3A-FCB0E92837CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BF7941E-C22E-4B27-8B3A-FCB0E92837CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
