@@ -18,13 +18,28 @@ namespace WebDashBord
         {
             Configuration = configuration;
         }
-
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddRazorPages();
+
+
+            //跨原始來源的連線
+            services.AddCors(options => options.AddPolicy(MyAllowSpecificOrigins,
+            builder =>
+            {
+                builder.AllowAnyMethod()
+                       .AllowAnyHeader()
+                       .WithOrigins("http://whw.cjee.tw",
+                                    "https://localhost:5001")
+                       .SetIsOriginAllowed(origin => true)
+                       .AllowCredentials();
+            }));
+
+
             services.AddSignalR();
         }
 
@@ -48,6 +63,8 @@ namespace WebDashBord
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(MyAllowSpecificOrigins);//CorsPolicy
 
             app.UseEndpoints(endpoints =>
             {
