@@ -7,18 +7,25 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using System.Text.Json;
 
+using TOPLC;
+
 namespace PLCGateway
 {
     public partial class Form1 : Form
     {
         HubConnection connection;
+        Toplc PLC;
         int i;
         public Form1()
         {
             InitializeComponent();
             connection = new HubConnectionBuilder()
-            .WithUrl("http://whw.cjee.tw/ChatHub")
+            .WithUrl("https://whw.cjee.tw/ChatHub")         
             .Build();
+
+
+            PLC = new Toplc("192.168.0.108", 1501);
+
 
             #region snippet_ClosedRestart
             connection.Closed += async (error) =>
@@ -53,7 +60,22 @@ namespace PLCGateway
             Random rnd = new Random();
             return rnd.Next(min, max);
         }
+        /// <summary>
+        /// 十六進制轉十進制轉換
+        /// </summary>
+        /// <param name="hex">十六進制字串</param>
+        /// <param name="dot">相乘倍率</param>
+        /// <returns>數字字串</returns>
+        string HEX2DEC(string hex, double dot)
+        {
 
+            string Dec = (dot * Convert.ToInt32(hex, 16)).ToString();
+            //string DecDot = Dec.Insert(Dec.Length - dot, ".");
+         //double Rounded =  Math.Round(Dec, 1);
+            return Dec;
+
+
+        }
         private void AutoSend(object state)
         {
             #region jsonGen
@@ -75,26 +97,46 @@ namespace PLCGateway
                 {
                     new Area
                     {
-                        AreaName = "A區",
+                        AreaName = "A1區",
 
                      Sensors =new List<Sensor>
                      {
-                       new Sensor { Name = "濕度", Value = RandGen(60,90), unit = "%" },
-                       new Sensor { Name = "溫度", Value = RandGen(25,32), unit = "℃" }
+                       new Sensor { Name = "空氣濕度", Value = HEX2DEC(PLC.R[101],0.1), unit = "%"},
+                       new Sensor { Name = "空氣溫度", Value = HEX2DEC(PLC.R[100],0.1), unit = "℃"},
+                       new Sensor { Name = "葉面濕度", Value = HEX2DEC(PLC.R[102],0.1), unit = "%"}
                      }
+                    },
+                    new Area
+                    {
+                        AreaName = "A2區",
+                        Sensors = new List<Sensor>
+                        {
+
+                          new Sensor { Name = "空氣濕度", Value = HEX2DEC(PLC.R[107],0.1), unit = "%"},
+                          new Sensor { Name = "空氣溫度", Value = HEX2DEC(PLC.R[106],0.1), unit = "℃"},
+                          new Sensor { Name = "葉面濕度", Value = HEX2DEC(PLC.R[104],0.1), unit = "%"}
+                        }
                     },
                     new Area
                     {
                         AreaName = "B區",
                         Sensors = new List<Sensor>
                         {
-                            new Sensor { Name = "光度", Value =  RandGen(0,100000), unit = "Lux" },
-                            new Sensor { Name = "葉面濕度度", Value = RandGen(80,90), unit = "%" },
-                            new Sensor { Name = "葉面濕度度2", Value = RandGen(80,90), unit = "%" }
+                          new Sensor { Name = "空氣濕度", Value = HEX2DEC(PLC.R[108],0.1), unit = "%"},
+                          new Sensor { Name = "空氣溫度", Value = HEX2DEC(PLC.R[109],0.1), unit = "℃"},
+                          new Sensor { Name = "葉面濕度", Value = HEX2DEC(PLC.R[117],0.1), unit = "%"}
+                        }
+                    },
+                    new Area
+                    {
+                        AreaName = "C區",
+                        Sensors = new List<Sensor>
+                        {
+                          new Sensor { Name = "空氣濕度", Value = HEX2DEC(PLC.R[120],0.1), unit = "%"},
+                          new Sensor { Name = "空氣溫度", Value = HEX2DEC(PLC.R[119],0.1), unit = "℃"},
+                          new Sensor { Name = "葉面濕度", Value = HEX2DEC(PLC.R[123],0.1), unit = "%"}
                         }
                     }
-
-
                 }
             };
             string WHJson = JsonSerializer.Serialize(plj, options);
@@ -109,7 +151,7 @@ namespace PLCGateway
                 connection.InvokeAsync("PushJson", WHJson);
 
 
-                textBox1.InvokeIfRequired(() => { textBox1.Text = i.ToString() ; });
+                textBox1.InvokeIfRequired(() => { textBox1.Text = i.ToString() + Environment.NewLine + WHJson; });
 
                 //textBox1.AppendText(i.ToString() +"\r\n");
                 #endregion
@@ -128,7 +170,7 @@ namespace PLCGateway
         {
 
         }
-        public Sensor(string Name, double Value, string unit)
+        public Sensor(string Name, string Value, string unit)
         {
             this.Name = Name;
             this.Value = Value;
@@ -136,7 +178,7 @@ namespace PLCGateway
         }
 
         public string Name { get; set; }
-        public double Value { get; set; }
+        public string Value { get; set; }
         public string unit { get; set; }
 
     }
