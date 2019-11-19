@@ -3,6 +3,9 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<body onload="appendTable(jsonArray);">
+
+
 
 <div class="text-center">
     <h1 id="myHeaaa" onclick="testsub()" class="display-4">潘連進溫室環控系統</h1>
@@ -10,6 +13,130 @@
     <input type="text" id="jjj" />
     <p id="test"></p>
 </div>
+
+
+
+
+
+
+
+    <h3 align="center">json示例程式碼</h3>
+    <div id="div1"></div>
+
+
+
+
+
+
+
+</body>
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+
+
+
+    var jsonArray = [
+        {
+            "編號": "1001",
+            "名稱": "k-means",
+            "描述": "K-means演算法是硬聚類演算法，是典型的基於原型的目標函式聚類方法的代表",
+            "操作": "<button>編輯</button>"
+        },
+
+        {
+            "編號": "1002",
+            "名稱": "restful",
+            "描述": "一種軟體架構風格、設計風格，而不是標準，只是提供了一組設計原則和約束條件",
+            "操作": "<button>刪除</button>"
+        },
+        {
+            "編號": "1021",
+            "名稱": "k-means",
+            "描述": "K-means演算法是硬聚類演算法，是典型的基於原型的目標函式聚類方法的代表",
+            "操作": "<button>編輯</button>"
+        }
+    ];
+
+    
+      
+    var headArray = [];
+    function parseHead(oneRow) {
+        debugger  
+        for (var i in oneRow) {
+            
+            headArray[headArray.length] = i;
+            console.log(i);
+
+            console.log(i);
+
+
+        }
+    }
+    
+
+    function appendTable() {
+
+        parseHead(jsonArray[0]);
+        var div = document.getElementById("div1");
+        var table = document.createElement("table");
+        var thead = document.createElement("tr");
+
+
+        for (var count = 0; count < headArray.length; count++) {
+
+            var td = document.createElement("th");
+            td.innerHTML = headArray[count];
+            thead.appendChild(td);
+        }
+        table.appendChild(thead);
+
+
+
+
+        for (var tableRowNo = 0; tableRowNo < jsonArray.length; tableRowNo++) {
+
+            var tr = document.createElement("tr");
+            for (var headCount = 0; headCount < headArray.length; headCount++) {
+                var cell = document.createElement("td");
+                cell.innerHTML = jsonArray[tableRowNo][headArray[headCount]];
+                tr.appendChild(cell);
+            }
+            table.appendChild(tr);
+        }
+        div.appendChild(table);
+    }
+
+</script>
+<style>
+    table {
+        width: 900px;
+        padding: 0;
+        margin: 20 auto;
+        border-collapse: collapse;
+    }
+
+    td,
+    th {
+        border: 1px solid #ddd;
+        padding: 6px 6px 6px 12px;
+        color: #4f6b72;
+        text-align: center;
+    }
+
+    th {
+        background: #d3d3d3;
+
+    }
+</style>
 
