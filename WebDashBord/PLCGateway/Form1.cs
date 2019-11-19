@@ -139,7 +139,30 @@ namespace PLCGateway
                     }
                 }
             };
-            string WHJson = JsonSerializer.Serialize(plj, options);
+
+
+            WHV2 hV2 = new WHV2
+            {
+                sensorV2s = new List<SensorV2>
+                {
+                    new SensorV2{AreaName = "A1區",Name = "空氣濕度", Value = HEX2DEC(PLC.R[101],0.1), unit = "%"},
+                    new SensorV2{AreaName = "A1區", Name = "空氣溫度", Value = HEX2DEC(PLC.R[100],0.1), unit = "℃"},
+                    new SensorV2{AreaName = "A1區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[102],0.1), unit = "%"},
+                    new SensorV2{AreaName = "A2區", Name = "空氣濕度", Value = HEX2DEC(PLC.R[107],0.1), unit = "%"},
+                    new SensorV2{AreaName = "A2區", Name = "空氣溫度", Value = HEX2DEC(PLC.R[106],0.1), unit = "℃"},
+                    new SensorV2{AreaName = "A2區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[104],0.1), unit = "%"},
+                    new SensorV2{AreaName = "B區", Name = "空氣濕度", Value = HEX2DEC(PLC.R[108],0.1), unit = "%"},
+                    new SensorV2{AreaName = "B區", Name = "空氣溫度", Value = HEX2DEC(PLC.R[109],0.1), unit = "℃"},
+                    new SensorV2{AreaName = "B區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[117],0.1), unit = "%"},
+                    new SensorV2{AreaName = "C區", Name = "空氣濕度", Value = HEX2DEC(PLC.R[120],0.1), unit = "%"},
+                    new SensorV2{AreaName = "C區", Name = "空氣溫度", Value = HEX2DEC(PLC.R[119],0.1), unit = "℃"},
+                    new SensorV2{AreaName = "C區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[123],0.1), unit = "%"}
+
+            }
+            };
+
+
+            string WHJson = JsonSerializer.Serialize(hV2.sensorV2s, options);
 
             #endregion
 
@@ -163,6 +186,23 @@ namespace PLCGateway
             #endregion
         }
     }
+
+    class SensorV2
+    {
+        public string AreaName { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
+        public string unit { get; set; }
+    }
+
+    class WHV2
+    {
+       public List<SensorV2> sensorV2s { get; set; }
+    }
+
+
+
+
     #region CSS
     class Sensor
     {
