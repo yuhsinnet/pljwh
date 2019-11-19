@@ -33,7 +33,7 @@ namespace WebDashBord
             {
                 builder.AllowAnyMethod()
                        .AllowAnyHeader()
-                       .WithOrigins("http://whw.cjee.tw",
+                       .WithOrigins("https://whw.cjee.tw",
                                     "https://localhost:5001")
                        .SetIsOriginAllowed(origin => true)
                        .AllowCredentials();
