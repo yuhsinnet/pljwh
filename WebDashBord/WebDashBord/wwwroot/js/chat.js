@@ -1,4 +1,4 @@
-﻿//"use strict";
+﻿"use strict";
 
 var connection = new signalR.HubConnectionBuilder().withUrl("https://whw.cjee.tw/ChatHub").build();
 
@@ -18,25 +18,26 @@ connection.on("JsonGet", (json) => {
 
 
 /// test W3Scool
-var x, txt = "";
-txt += "<table border='1'>"
+var txt="";
+txt += "<table>"
 
 txt += "<tr>"+
-            "<th>AreNsme</th>"+
-            "<th>SensorName</th>"+
-            "<th>Value</th>"+
-            "<th>unit</th>";
+            "<th>區域</th>"+
+            "<th>感測器類型</th>"+
+            "<th>讀數</th>"+
+            //"<th>unit</th>"+
+            "</tr>";
 
 
-for (x in obj) {
+for (var i = 0; i < obj.length; i++  ) {
   txt += "<tr>"+ 
 
-            "<td>" + obj[x].AreaName + "</td>"+
-            "<td>" + obj[x].Name + "</td>"+
-            "<td>" + obj[x].Value + "</td>"+
-            "<td>" + obj[x].unit + "</td>"+  
-  
-        + "</tr>";
+            "<td>" + obj[i].AreaName + "</td>"+
+            "<td>" + obj[i].Name + "</td>"+
+            "<td>" + obj[i].Value + obj[i].unit + "</td>" +
+            //"<td>" + obj[i].unit + "</td>"+  
+            //"<td>test</tb>"
+         "</tr>";
 }
 txt += "</table>"    
 document.getElementById("test").innerHTML = txt;
@@ -118,7 +119,7 @@ connection.start().then(function () {
     
     //document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
-    document.getElementById("test").innerHTML = err;
+    document.getElementById("demo").innerHTML = err;
 
 
 });
