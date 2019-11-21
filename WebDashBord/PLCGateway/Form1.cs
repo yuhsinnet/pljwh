@@ -156,8 +156,13 @@ namespace PLCGateway
                     new SensorV2{AreaName = "B區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[117],0.1), unit = "%"},
                     new SensorV2{AreaName = "C區", Name = "空氣濕度", Value = HEX2DEC(PLC.R[120],0.1), unit = "%"},
                     new SensorV2{AreaName = "C區", Name = "空氣溫度", Value = HEX2DEC(PLC.R[119],0.1), unit = "℃"},
-                    new SensorV2{AreaName = "C區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[123],0.1), unit = "%"}
-
+                    new SensorV2{AreaName = "C區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[123],0.1), unit = "%"},
+                    new SensorV2{AreaName = "D區", Name = "空氣濕度", Value = HEX2DEC(PLC.R[114],0.1), unit = "%"},
+                    new SensorV2{AreaName = "D區", Name = "空氣溫度", Value = HEX2DEC(PLC.R[113],0.1), unit = "℃"},
+                    new SensorV2{AreaName = "D區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[115],0.1), unit = "%"},
+                    new SensorV2{AreaName = "E區", Name = "空氣濕度", Value = HEX2DEC(PLC.R[122],0.1), unit = "%"},
+                    new SensorV2{AreaName = "E區", Name = "空氣溫度", Value = HEX2DEC(PLC.R[121],0.1), unit = "℃"},
+                    new SensorV2{AreaName = "E區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[125],0.1), unit = "%"},
             }
             };
 
