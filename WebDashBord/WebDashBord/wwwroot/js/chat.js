@@ -1,12 +1,54 @@
-﻿"use strict";
+﻿//"use strict";
 
 var connection = new signalR.HubConnectionBuilder().withUrl("https://whw.cjee.tw/ChatHub").build();
 
+//var jsonArray;
 
 connection.on("JsonGet", (json) => {
+    //jsonArray = json;
+    
+    //document.getElementById("test").innerHTML = jsonArray;
+    //appendTable(jsonArray);
 
-    document.getElementById("test").innerHTML = json;
+
+    var obj = JSON.parse(json);
+
+    //document.getElementById("test").innerHTML = obj[0].Value;
+
+
+
+/// test W3Scool
+var x, txt = "";
+txt += "<table border='1'>"
+
+txt += "<tr>"+
+            "<th>AreNsme</th>"+
+            "<th>SensorName</th>"+
+            "<th>Value</th>"+
+            "<th>unit</th>";
+
+
+for (x in obj) {
+  txt += "<tr>"+ 
+
+            "<td>" + obj[x].AreaName + "</td>"+
+            "<td>" + obj[x].Name + "</td>"+
+            "<td>" + obj[x].Value + "</td>"+
+            "<td>" + obj[x].unit + "</td>"+  
+  
+        + "</tr>";
+}
+txt += "</table>"    
+document.getElementById("test").innerHTML = txt;
+
+
+
+
 });
+
+
+
+
 
 
 var headArray = [];
