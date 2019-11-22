@@ -146,6 +146,7 @@ namespace PLCGateway
                 sensorV2s = new List<SensorV2>
                 {
                     new SensorV2{AreaName = "全區", Name= "照度", Value= HEX2DEC(PLC.R[110] + PLC.R[111],1),unit="勒克斯"},
+                    new SensorV2{AreaName = "全區", Name = "大氣壓", Value = HEX2DEC(PLC.R[112],0.1),unit = "毫巴"},
                     new SensorV2{AreaName = "A1區",Name = "空氣濕度", Value = HEX2DEC(PLC.R[101],0.1), unit = "%"},
                     new SensorV2{AreaName = "A1區", Name = "空氣溫度", Value = HEX2DEC(PLC.R[100],0.1), unit = "℃"},
                     new SensorV2{AreaName = "A1區", Name = "葉面濕度", Value = HEX2DEC(PLC.R[102],0.1), unit = "%"},
