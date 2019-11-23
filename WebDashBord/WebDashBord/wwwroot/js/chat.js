@@ -4,7 +4,7 @@ var connection = new signalR.HubConnectionBuilder().withUrl("https://whw.cjee.tw
 
 
 connection.on("JsonGet", (json) => {
-
+    document.getElementById("ConnectStat").innerHTML = "";
     var obj = JSON.parse(json);
 
 
@@ -41,7 +41,7 @@ txt += "</table>"
 
 
 connection.start().then(function () {
-    document.getElementById("ConnectStat").innerHTML = "連線成功";
+    document.getElementById("ConnectStat").innerHTML = "連線成功，等待資料推送.....";
     
     //document.getElementById("sendButton").disabled = false;
 }).catch(function (err) {
