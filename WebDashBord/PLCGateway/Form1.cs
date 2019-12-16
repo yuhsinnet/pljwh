@@ -53,6 +53,10 @@ namespace PLCGateway
 
             System.Threading.Timer ttmm = new System.Threading.Timer(new TimerCallback(AutoSend));
             ttmm.Change(1000, 1000);
+
+            this.Text += "  " + GetProductVersion();
+
+
         }
 
         double RandGen(int min, int max)
@@ -188,10 +192,28 @@ namespace PLCGateway
             }
             catch (Exception ex)
             {
-                textBox1.InvokeIfRequired(() => { textBox1.AppendText(ex + "\r\n"); });
+                textBox2.InvokeIfRequired(() => { textBox2.AppendText(ex + "\r\n"); });
             }
             #endregion
         }
+
+        /// <summary>
+        /// 取得發行版本資訊
+        /// </summary>
+        /// <returns></returns>
+        string GetProductVersion()
+        {
+
+            
+            if (System.Deployment.Application.ApplicationDeployment.IsNetworkDeployed)
+            {
+                System.Deployment.Application.ApplicationDeployment ad = System.Deployment.Application.ApplicationDeployment.CurrentDeployment;
+                return ad.CurrentVersion.ToString();
+            }
+            else return "Debug Mode";
+
+        }
+
     }
 
     class SensorV2
