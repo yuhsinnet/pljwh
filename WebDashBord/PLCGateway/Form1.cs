@@ -41,13 +41,13 @@ namespace PLCGateway
             try
             {
                 connection.StartAsync();
-                textBox1.AppendText("Connection started\r\n");
+                textBox2.Text = "Connection started";
                 //connectButton.IsEnabled = false;
                 //sendButton.IsEnabled = true;
             }
             catch (Exception ex)
             {
-                textBox1.AppendText(ex.Message);
+                textBox2.Text = ex.ToString();
             }
 
 
